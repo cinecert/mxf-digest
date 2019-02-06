@@ -10,7 +10,7 @@ This document and associated reference implementation are hosted at https://gith
 
 SMPTE ST 377-1 Material Exchange Format (MXF) files are often very large (comprising tens or even hundreds of *gigabytes*), and transferring such files or even transiting them over a system bus to a CPU requires non-trivial resources. In addition, many file-based applications use message digest algorithms to uniquely identify files. The intersection of these two properties is a source of friction in many workflows, both because digesting files after writing them is resource intensive, and because the input to digest algorithms commonly utilized by these systems is inherently serial in nature while parallel processing of file contents is increasingly common. What is needed is a method of digesting large MXF files that supports both parallel calculation and out-of-order calculation.
 
-The proposed algorithm works with any serial-input digest by using the KLV sub-structure of an MXF file as a natural segmentation layer upon which to calculate an ordered set of digests. The digest values in this ordered set can then be the subject of another digest, finally producing an identifier that is appropriatly unique within the scope of the chosen digest algorithm. For maximum interoperability a single digest algorithm should be chosen for use by this process.
+The proposed algorithm works with any serial-input digest by using the KLV sub-structure of an MXF file as a natural segmentation layer upon which to calculate an ordered set of digests. The digest values in this ordered set can then be the subject of another digest, finally producing an identifier that is appropriately unique within the scope of the chosen digest algorithm. For maximum interoperability a single digest algorithm should be chosen for use by this process.
 
 ## Normative References
 
@@ -53,7 +53,7 @@ TODO: complete and implement prototype.
 
 ### Canonical Encoding
 
-The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form "urn:smpte:mxf-digest:&lt;hex-digits&gt;", where "mxf-digest" is a registerd NSS as defined in this document, and &lt;hex-digits&gt; is the hexadecimal encoding of the sequence digest.
+The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form "urn:smpte:mxf-digest:&lt;hex-digits&gt;", where "mxf-digest" is a registered NSS as defined in this document, and &lt;hex-digits&gt; is the hexadecimal encoding of the sequence digest.
 
 ### Equivalence
 
@@ -79,4 +79,4 @@ The astute reader may notice that there is already a digest-based SMPTE standard
 
 ## Bibliography
 
-[5]: SMPTE ST 2114:2017 -- Unique Digital Media Identifier (C4 ID)
+[5]: SMPTE ST 2114:2017 — Unique Digital Media Identifier (C4 ID)
