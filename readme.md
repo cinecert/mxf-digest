@@ -52,7 +52,7 @@ The primitive message digest algorithm shall be SHA512 as defined in [ISO/IEC 10
 
 ### MXF Run-In
 
-Skip run-in as described in ST 377-1[1], Sec. 6.5, Run-In Sequence.
+Skip run-in as described in [ST 377-1](#normative-references), Sec. 6.5, Run-In Sequence.
 
 TODO: complete and implement prototype.
 
@@ -76,7 +76,7 @@ TODO: complete and implement prototype.
 
 ### Canonical Encoding
 
-The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form "urn:smpte:mxf-digest:&lt;b58-digits&gt;", where "mxf-digest" is a registered NSS as defined in this document, and &lt;b58-digits&gt; is the Base58 encoding of the binary value of the sequence digest. The Base58 encoding shall be interpreted as defined in the section "C4 Base58" in ST 2114 (Sec. 5.1 in the 2017 edition.)
+The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form "urn:smpte:mxf-digest:&lt;b58-digits&gt;", where "mxf-digest" is a registered NSS as defined in this document, and &lt;b58-digits&gt; is the Base58 encoding of the binary value of the sequence digest. The Base58 encoding shall be interpreted as defined in SMPTE ST 2114, Sec. 5.1 "C4 Base58".
 
 
 #### Example
@@ -86,7 +86,7 @@ urn:smpte:mxf-digest:5C1YJuUNzbuG4tLzbW8eZypyaZZRKg6yzTuocEzcMXHFE6WoFsJQqJUVJZ7
 
 ## Equivalence
 
-While the normative algorithm processes the KLV packets in order, it should be noted that the packet digest values may be calculated in any order, at any time, so long as they are contributed to the sequence digest completely and in the same order in which the respective KLV packets appear in the MXF file. For a given list of KLV packets, any out-of-order calculation of MXF Digest that produces a value equal to the normative algorithm presented in [MXF-DIGEST calculation] is in compliance with this standard.
+While the normative algorithm processes the KLV packets in order, it should be noted that the packet digest values may be calculated in any order, at any time, so long as they are contributed to the sequence digest completely and in the same order in which the respective KLV packets appear in the MXF file. For a given list of KLV packets, any out-of-order calculation of MXF Digest that produces a value equal to the normative algorithm presented above in [MXF-DIGEST calculation](#mxf-digest-calculation) is in compliance with this standard.
 
 ## MXF-DIGEST URN NSS
 
