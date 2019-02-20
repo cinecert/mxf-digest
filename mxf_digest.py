@@ -2,15 +2,18 @@
 #
 # This program calculates a sha512 message digest over the set of
 # sha512 digests created by digesting each KLV packet in an MXF file.
+# The resulting digest is encoded as a URN value.
 #
 # Contact John Hurst jhurst@cinecert.com
 #
 
-
-
 import sys
 import struct
 import hashlib
+
+MXF_DIGEST_LEN = 88
+B58_RADIX = 58
+B58_CHARS = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
 # ST 336 for Individual Data Items and Top-Level Sets
 KEY_LENGTH = 16
@@ -60,12 +63,12 @@ def parse_klv_stream(reader):
         length = decode_BER_int_from_stream(reader)
         yield key, length
 
+
 #
 def mxf_digest_file(filename):
     """
-    Return an un-finalized sha512 message digest over the set
-    of sha512 digests created by digesting each KLV packet read
-    from the named file.
+    Return the sha512 message digest over the set of sha512 digests
+    created by digesting each KLV packet read from the named file.
     """
     with open(filename) as reader:
         digest_list = []
@@ -87,14 +90,23 @@ def mxf_digest_file(filename):
         for item in digest_list:
             md.update(item)
 
-        return md
+        return md.digest()
+
 
 #
-def format_mxf_digest_urn(md):
+def format_mxf_digest_urn(raw_digest):
     """
-    Finalize a sequence digest and format it as an MXF-DIGEST URN
+    Format a digest value as an MXF-DIGEST URN.
     """
-    return "urn:smpte:mxf-digest:{0}".format(md.hexdigest())
+    n = int(raw_digest.encode("hex"), 16)
+    mxfid = ""
+
+    while n:
+        n, y = divmod(n, B58_RADIX)
+        mxfid = B58_CHARS[y] + mxfid
+
+    return "urn:smpte:mxf-digest:" + ("1"*(MXF_DIGEST_LEN - len(mxfid))) + mxfid
+
 
 #
 #
