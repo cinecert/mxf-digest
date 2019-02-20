@@ -31,15 +31,15 @@ Note: The Base58 encoding defined by SMPTE ST 2114 is re-used here, but the C4 I
 
 ## Normative References
 
-SMPTE ST 377-1:2011 — Material Exchange Format (MXF) — File Format Specification
+[SMPTE ST 377-1:2011 — Material Exchange Format (MXF) — File Format Specification](https://doi.org/10.5594/SMPTE.ST377-1.2011)
 
-SMPTE ST 2029:2009 — Uniform Resource Names for SMPTE Resources
+[SMPTE ST 2029:2009 — Uniform Resource Names for SMPTE Resources](https://doi.org/10.5594/SMPTE.ST2029.2009)
 
-SMPTE ST 2114:2017 — Unique Digital Media Identifier (C4 ID)
+[SMPTE ST 2114:2017 — Unique Digital Media Identifier (C4 ID)](https://doi.org/10.5594/SMPTE.ST2114.2017)
 
-ISO/IEC 10118-3:2004 Information technology — Security techniques — Hash-functions — Part 3: Dedicated hash-functions
+[ISO/IEC 10118-3:2004 Information technology — Security techniques — Hash-functions — Part 3: Dedicated hash-functions](https://www.iso.org/standard/39876.html)
 
-IETF RFC 4234 — Augmented BNF for Syntax Specifications: ABNF
+[IETF RFC 4234 — Augmented BNF for Syntax Specifications: ABNF](https://www.ietf.org/rfc/rfc4234.txt)
 
 
 ## MXF-DIGEST calculation
@@ -47,12 +47,12 @@ IETF RFC 4234 — Augmented BNF for Syntax Specifications: ABNF
 
 ### Primitive Digest Algorithm
 
-The primitive message digest algorithm shall be SHA512 as defined in [ISO/IEC 10118-3].
+The primitive message digest algorithm shall be SHA512 as defined in [ISO/IEC 10118-3](https://www.iso.org/standard/39876.html).
 
 
 ### MXF Run-In
 
-Skip run-in as described in [ST 377-1](#normative-references), Sec. 6.5, Run-In Sequence.
+Skip run-in as described in [ST 377-1](https://doi.org/10.5594/SMPTE.ST377-1.2011), Sec. 6.5, "Run-In Sequence".
 
 TODO: complete and implement prototype.
 
@@ -76,7 +76,7 @@ TODO: complete and implement prototype.
 
 ### Canonical Encoding
 
-The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form "urn:smpte:mxf-digest:&lt;b58-digits&gt;", where "mxf-digest" is a registered NSS as defined in this document, and &lt;b58-digits&gt; is the Base58 encoding of the binary value of the sequence digest. The Base58 encoding shall be interpreted as defined in SMPTE ST 2114, Sec. 5.1 "C4 Base58".
+The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form "urn:smpte:mxf-digest:&lt;b58-digits&gt;", where "mxf-digest" is a registered NSS as defined in this document, and &lt;b58-digits&gt; is the Base58 encoding of the binary value of the sequence digest. The Base58 encoding shall be interpreted as defined in [SMPTE ST 2114](https://doi.org/10.5594/SMPTE.ST2114.2017), Sec. 5.1 "C4 Base58".
 
 
 #### Example
@@ -90,7 +90,7 @@ While the normative algorithm processes the KLV packets in order, it should be n
 
 ## MXF-DIGEST URN NSS
 
-The NSS of URNs for an MXF-DIGEST value shall begin with "mxf-digest:". The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using IETF RFC 4234 (EBNF) shall be:
+The NSS of URNs for an MXF-DIGEST value shall begin with "mxf-digest:". The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 4234 (EBNF)](https://www.ietf.org/rfc/rfc4234.txt) shall be:
 
 ```EBNF
 MXF-DIGEST-NSS  = "smpte:mxf-digest:" MXF-DIGEST
