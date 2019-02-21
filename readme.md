@@ -83,12 +83,12 @@ The algorithm shall operate on complete KLV packets, as defined in [SMPTE ST 336
 
 ### Canonical Encoding
 
-The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form `urn:smpte:mxf-digest:&lt;b58-digits&gt;`, where `mxf-digest` is a registered NSS as defined in this document, and `&lt;b58-digits&gt;` is the Base58 encoding of the sequence digest value octets. The Base58 encoding shall be interpreted as defined in [SMPTE ST 2114](https://doi.org/10.5594/SMPTE.ST2114.2017), Sec. 5.1 "C4 Base58".
+The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form `urn:smpte:mxf-digest:<b58-digits>`, where `mxf-digest` is a registered NSS as defined in this document, and `<b58-digits>` is the Base58 encoding of the sequence digest value octets. The Base58 encoding shall be interpreted as defined in [SMPTE ST 2114](https://doi.org/10.5594/SMPTE.ST2114.2017), Sec. 5.1 "C4 Base58".
 
 
 #### Example
 
-urn:smpte:mxf-digest:5C1YJuUNzbuG4tLzbW8eZypyaZZRKg6yzTuocEzcMXHFE6WoFsJQqJUVJZ7ehjHu18qCaexfvskr4qZeE4zBDwwm
+`urn:smpte:mxf-digest:5C1YJuUNzbuG4tLzbW8eZypyaZZRKg6yzTuocEzcMXHFE6WoFsJQqJUVJZ7ehjHu18qCaexfvskr4qZeE4zBDwwm`
 
 
 ## Equivalence
@@ -106,7 +106,7 @@ The NID of an MXF-DIGEST URN shall be `smpte`, as defined in [SMPTE ST 2029](htt
 
 The NSS of URNs for an MXF-DIGEST value shall begin with "mxf-digest:". The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 4234 (EBNF)](https://www.ietf.org/rfc/rfc4234.txt) shall be:
 
-```EBNF
+```BNF
 MXF-DIGEST-NSS  = "smpte:mxf-digest:" MXF-DIGEST
 MXF-DIGEST      = 88*B58-DIGIT
 B58-DIGIT       = %x31-39 / ; 1-9
