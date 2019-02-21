@@ -10,7 +10,10 @@
       * [Canonical Encoding](#canonical-encoding)
       * [Example](#example)
    * [Equivalence](#equivalence)
-   * [MXF-DIGEST URN NSS](#mxf-digest-urn-nss)
+   * [MXF-DIGEST URN](#mxf-digest-urn)
+      * [MXF-DIGEST URN NID](#mxf-digest-urn-nid)
+      * [MXF-DIGEST URN NSS](#mxf-digest-urn-nss)
+   * [Bibliography](#bibliography)
 
 ## Status
 
@@ -30,6 +33,8 @@ Note: The Base58 encoding defined by SMPTE ST 2114 is re-used here, but the C4 I
 
 
 ## Normative References
+
+[SMPTE ST 336:2007 — Data Encoding Protocol Using Key-Length-Value](https://doi.org/10.5594/SMPTE.ST336.2007)
 
 [SMPTE ST 377-1:2011 — Material Exchange Format (MXF) — File Format Specification](https://doi.org/10.5594/SMPTE.ST377-1.2011)
 
@@ -54,16 +59,18 @@ The primitive message digest algorithm shall be SHA512 as defined in [ISO/IEC 10
 
 Skip run-in as described in [ST 377-1](https://doi.org/10.5594/SMPTE.ST377-1.2011), Sec. 6.5, "Run-In Sequence".
 
-TODO: complete and implement prototype.
+Note to IMF implementors: MXF run-in is disallowed for use by the [IMF Essence Component](https://doi.org/10.5594/SMPTE.ST2067-5.2013). This provision of the MXF-DIGEST process exists for maximum compatibility with other MXF applications. DO NOT start adding run-in to IMF MXF files just because you read about it here. I will hunt you down.
 
 
 ### KLV Packet Digests
 
+The algorithm shall operate on complete KLV packets, as defined in [SMPTE ST 336](https://doi.org/10.5594/SMPTE.ST336.2007), which shall be digested in their original form. Expansion or translation of BER-encoded Key or Value Length fields shall not be performed.
+
 * Establish an empty list of digest values
-* For each KLV packet (Individual data items and top-level Sets) in the file:
+* For each KLV packet in the file:
   * instantiate a fresh Primitive Digest context (a *packet digest*)
-  * Update the digest context with all of the bytes comprising the KLV packet (the packet shall be digested in its original form:  expansion or translation of BER items shall not be performed)
-  * finalize the digest context and append it to the list of digest values
+  * Update the packet digest context with all of the bytes comprising the KLV packet
+  * finalize the packet digest context and append its value to the list of digest values
 
 
 ### Sequence Digest
@@ -88,7 +95,13 @@ urn:smpte:mxf-digest:5C1YJuUNzbuG4tLzbW8eZypyaZZRKg6yzTuocEzcMXHFE6WoFsJQqJUVJZ7
 
 While the normative algorithm processes the KLV packets in order, it should be noted that the packet digest values may be calculated in any order, at any time, so long as they are contributed to the sequence digest completely and in the same order in which the respective KLV packets appear in the MXF file. For a given list of KLV packets, any out-of-order calculation of MXF Digest that produces a value equal to the normative algorithm presented above in [MXF-DIGEST calculation](#mxf-digest-calculation) is in compliance with this standard.
 
-## MXF-DIGEST URN NSS
+## MXF-DIGEST URN
+
+### MXF-DIGEST URN NID
+
+The NID of an MXF-DIGEST URN shall be `smpte`, as defined in [SMPTE ST 2029](https://doi.org/10.5594/SMPTE.ST2029.2009).
+
+### MXF-DIGEST URN NSS
 
 The NSS of URNs for an MXF-DIGEST value shall begin with "mxf-digest:". The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 4234 (EBNF)](https://www.ietf.org/rfc/rfc4234.txt) shall be:
 
@@ -103,7 +116,10 @@ B58-DIGIT       = %x31-39 / ; 1-9
                   %x6d-7a / ; m-z
 ```
 
-The Base58 digits in the URN representation of an MXF-DIGEST shall be the Base58 representation of the [Sequence Digest]. Lexical equivalence of MXF-DIGEST URN values shall be determined by an exact string match that is case-sensitive for B58-DIGIT characters.
+The Base58 digits in the URN representation of an MXF-DIGEST shall be the Base58 representation of the [Sequence Digest](#sequence-digest). Lexical equivalence of MXF-DIGEST URN values shall be determined by an exact string match that is case-sensitive for B58-DIGIT characters.
 
-TODO: What do we want here to correctly anchor the NSS definition to ST 2029?
+
+## Bibliography
+
+[SMPTE ST 2067-5:2013 — Interoperable Master Format — Essence Component](https://doi.org/10.5594/SMPTE.ST2067-5.2013)
 
