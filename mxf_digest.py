@@ -11,6 +11,8 @@ import sys
 import struct
 import hashlib
 
+MXF_MAX_RUNIN = 65536
+MXF_RUNIN_END_MARKER = "\x06\x0e\x2b\x34\x02\x05\x01\x01\x0d\x01\x02"
 MXF_DIGEST_LEN = 88
 B58_RADIX = 58
 B58_CHARS = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
@@ -65,12 +67,49 @@ def parse_klv_stream(reader):
 
 
 #
+def read_mxf_run_in(handle):
+    """
+    Read any run-in from the front of an MXF file and leave the file
+    pointer at the first byte of the first partition. Returns the
+    collected run-in or None if the header starts at offset zero.
+    """
+    count = 0
+    runin_buffer = ""
+    marker_buffer = ""
+
+    while count < MXF_MAX_RUNIN:
+        byte = handle.read(1)
+        count += 1
+        runin_buffer += byte
+        if byte == "\x06":
+            marker_buffer = byte
+        else:
+            if marker_buffer:
+                marker_buffer += byte
+                l = len(marker_buffer)
+                if marker_buffer[:l] != MXF_RUNIN_END_MARKER[:l]:
+                    marker_buffer = ""
+                elif l == len(MXF_RUNIN_END_MARKER):
+                    # remove marker bytes from the end of the run-in buffer
+                    if len(runin_buffer) > l:
+                        runin_buffer = runin_buffer[:-l]
+                    else:
+                        runin_buffer = None
+                    # seek to the start of the header
+                    handle.seek(handle.tell()-l)
+                    return runin_buffer
+
+    raise ValueError("No MXF partiton found in allowable run-in.")
+
+
+#
 def mxf_digest_file(filename):
     """
     Return the sha512 message digest over the set of sha512 digests
     created by digesting each KLV packet read from the named file.
     """
     with open(filename) as reader:
+        read_mxf_run_in(reader) # ignore run-in
         digest_list = []
         start_position = reader.tell()
 
