@@ -29,8 +29,6 @@ The proposed algorithm works with any serial-input digest by using the KLV sub-s
 
 The resulting digest value must have a canonical encoding to promote interoperable use across applications. This proposal defines a URN encoding which employs a Base58 alphabet chosen for brevity and lack of ambiguity when used with common path separators.
 
-Note: The Base58 encoding defined by SMPTE ST 2114 is re-used here, but the C4 ID digest and block digest methods are not used; the C4 ID algorithm for non-contiguous blocks of data sorts and de-duplicates the constituent block digests, resulting in a process that would produce the same identifier for two MXF files that differ only in the order of their respective KLV packets, or in the repetition of certain identical packets.
-
 
 ## Normative References
 
@@ -104,7 +102,7 @@ The NID of an MXF-DIGEST URN shall be `smpte`, as defined in [SMPTE ST 2029](htt
 
 ### MXF-DIGEST URN NSS
 
-The NSS of URNs for an MXF-DIGEST value shall begin with "mxf-digest:". The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 4234 (EBNF)](https://www.ietf.org/rfc/rfc4234.txt) shall be:
+The NSS of an MXF-DIGEST URN shall begin with "mxf-digest:". The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 4234 (EBNF)](https://www.ietf.org/rfc/rfc4234.txt) shall be:
 
 ```BNF
 MXF-DIGEST-NSS  = "smpte:mxf-digest:" MXF-DIGEST
