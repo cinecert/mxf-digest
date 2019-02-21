@@ -151,7 +151,7 @@ def format_mxf_digest_urn(raw_digest):
 #
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        raise UsageError("What")
+        raise UsageError("USAGE: mxf_digest.py <mxf-filename>+")
     for item in sys.argv[1:]:
         print ("({0}) {1}".format(
             item,
