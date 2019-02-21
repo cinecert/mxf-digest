@@ -81,7 +81,7 @@ def read_mxf_run_in(handle):
         byte = handle.read(1)
         count += 1
         runin_buffer += byte
-        if byte == "\x06":
+        if byte == MXF_RUNIN_END_MARKER[0]:
             marker_buffer = byte
         else:
             if marker_buffer:
