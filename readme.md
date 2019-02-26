@@ -42,7 +42,7 @@ The resulting digest value must have a canonical encoding to promote interoperab
 
 [ISO/IEC 10118-3:2004 Information technology — Security techniques — Hash-functions — Part 3: Dedicated hash-functions](https://www.iso.org/standard/39876.html)
 
-[IETF RFC 4234 — Augmented BNF for Syntax Specifications: ABNF](https://www.ietf.org/rfc/rfc4234.txt)
+[IETF RFC 5234 — Augmented BNF for Syntax Specifications: ABNF](https://www.ietf.org/rfc/rfc5234.txt)
 
 
 ## MXF-DIGEST calculation
@@ -75,13 +75,13 @@ The algorithm shall operate on complete KLV packets, as defined in [SMPTE ST 336
 
 * Instantiate a fresh Primitive Digest context (the *sequence digest*)
 * For each packet digest in the list of digest values:
-  * update the sequence digest context with the binary value of the packet digest
+  * update the sequence digest context with the big-endian integer octets of the packet digest
 * Finalize the sequence digest
 
 
 ### Canonical Encoding
 
-The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form `urn:smpte:mxf-digest:<b58-digits>`, where `mxf-digest` is a registered NSS as defined in this document, and `<b58-digits>` is the Base58 encoding of the sequence digest value octets. The Base58 encoding shall be interpreted as defined in [SMPTE ST 2114](https://doi.org/10.5594/SMPTE.ST2114.2017), Sec. 5.1 "C4 Base58".
+The MXF-DIGEST value is created by encoding the sequence digest value as URN item of the form `urn:smpte:mxf-digest:<b58-digits>`, where `mxf-digest` is a registered NSS as defined in this document, and `<b58-digits>` is the Base58 encoding of the big-endian integer octets of the sequence digest. The Base58 encoding shall be interpreted as defined in [SMPTE ST 2114](https://doi.org/10.5594/SMPTE.ST2114.2017), Sec. 5.1 "C4 Base58".
 
 
 #### Example
@@ -102,7 +102,7 @@ The NID of an MXF-DIGEST URN shall be `smpte`, as defined in [SMPTE ST 2029](htt
 
 ### MXF-DIGEST URN NSS
 
-The NSS of an MXF-DIGEST URN shall begin with `mxf-digest:`. The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 4234 (EBNF)](https://www.ietf.org/rfc/rfc4234.txt), shall be:
+The NSS of an MXF-DIGEST URN shall begin with `mxf-digest:`. The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 5234 (EBNF)](https://www.ietf.org/rfc/rfc5234.txt), shall be:
 
 ```BNF
 MXF-DIGEST-NSS  = "smpte:mxf-digest:" MXF-DIGEST
