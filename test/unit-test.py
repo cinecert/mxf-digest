@@ -9,7 +9,7 @@ import mxf_digest
 
 test_target = "oneframe.pcm.mxf"
 
-## first, this program is destined to run from "test/"
+## first, this program is designed to run from "test/"
 if not os.path.exists(test_target):
     raise RuntimeError("The source file is missing or your $CWD is not the \"test/\" directory.")
 
