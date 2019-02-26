@@ -86,7 +86,7 @@ The MXF-DIGEST value is created by encoding the sequence digest value as URN ite
 
 #### Example
 
-`urn:smpte:mxf-digest:5C1YJuUNzbuG4tLzbW8eZypyaZZRKg6yzTuocEzcMXHFE6WoFsJQqJUVJZ7ehjHu18qCaexfvskr4qZeE4zBDwwm`
+`urn:smpte:mxf-digest:64pMA4dgr8iLqAEkiMpfJv2JHLubLY9wpDUeAcr3pto3gKGsszyCqr9ofBk668EJrVNagTW7WujyYZV9YEUqCRGE`
 
 
 ## Equivalence
@@ -102,7 +102,7 @@ The NID of an MXF-DIGEST URN shall be `smpte`, as defined in [SMPTE ST 2029](htt
 
 ### MXF-DIGEST URN NSS
 
-The NSS of an MXF-DIGEST URN shall begin with "mxf-digest:". The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 4234 (EBNF)](https://www.ietf.org/rfc/rfc4234.txt) shall be:
+The NSS of an MXF-DIGEST URN shall begin with `mxf-digest:`. The identifier structure for the MXF-DIGEST subnamespace (MXF-DIGEST-NSS), described using [IETF RFC 4234 (EBNF)](https://www.ietf.org/rfc/rfc4234.txt), shall be:
 
 ```BNF
 MXF-DIGEST-NSS  = "smpte:mxf-digest:" MXF-DIGEST
