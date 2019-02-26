@@ -55,9 +55,9 @@ The primitive message digest algorithm shall be SHA512 as defined in [ISO/IEC 10
 
 ### MXF Run-In
 
-Skip run-in as described in [ST 377-1](https://doi.org/10.5594/SMPTE.ST377-1.2011), Sec. 6.5, "Run-In Sequence".
+Run-in, as defined in [ST 377-1](https://doi.org/10.5594/SMPTE.ST377-1.2011), Sec. 6.5, "Run-In Sequence", shall not be contributed to the digest. If present, run-in bytes shall be skipped before digest calculation begins.
 
-Note to IMF implementors: MXF run-in is disallowed for use by the [IMF Essence Component](https://doi.org/10.5594/SMPTE.ST2067-5.2013). This provision of the MXF-DIGEST process exists for maximum compatibility with other MXF applications. DO NOT start adding run-in to IMF MXF files just because you read about it here. Just forget you ever read about it.
+Note to IMF implementors: <b>There is no run-in in IMF.</b> MXF run-in is disallowed for use by the [IMF Essence Component](https://doi.org/10.5594/SMPTE.ST2067-5.2013). This provision of the MXF-DIGEST process exists for maximum compatibility with other MXF applications.
 
 
 ### KLV Packet Digests
@@ -91,7 +91,7 @@ The MXF-DIGEST value is created by encoding the sequence digest value as URN ite
 
 ## Equivalence
 
-While the normative algorithm processes the KLV packets in order, it should be noted that the packet digest values may be calculated in any order, at any time, so long as they are contributed to the sequence digest completely and in the same order in which the respective KLV packets appear in the MXF file. For a given list of KLV packets, any out-of-order calculation of MXF Digest that produces a value equal to the normative algorithm presented above in [MXF-DIGEST calculation](#mxf-digest-calculation) is in compliance with this standard.
+While the normative algorithm processes the KLV packets in order, it should be noted that the packet digest values may be calculated in any order, at any time, so long as they are contributed to the sequence digest completely and in the same order in which the respective KLV packets appear in the MXF file. For a given list of KLV packets, any out-of-order calculation of MXF Digest that produces a value equal to the normative algorithm presented above in [MXF-DIGEST calculation](#mxf-digest-calculation) is in compliance with this memo.
 
 
 ## MXF-DIGEST URN
