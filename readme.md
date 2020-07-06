@@ -27,7 +27,7 @@ SMPTE ST 377-1 Material Exchange Format (MXF) files are often very large (compri
 
 The proposed algorithm works with any serial-input digest by using the KLV sub-structure of an MXF file as a natural segmentation layer upon which to calculate an ordered set of digests. The digest values in this ordered set can then be the subject of another digest, finally producing an identifier that is appropriately unique within the scope of the chosen digest algorithm. For maximum interoperability a single digest algorithm should be chosen for use by this process, and so this proposal selects SHA-512.
 
-The resulting digest value must have a canonical encoding to promote interoperable use across applications. This proposal defines a URN encoding which employs a Base58 alphabet chosen for brevity and lack of ambiguity when used with common path separators.
+The resulting digest value must have a canonical encoding to promote interoperable use across applications. This proposal defines a URN encoding which employs a Base58 alphabet chosen for brevity and lack of conflict with URI special characters.
 
 
 ## Normative References
@@ -57,7 +57,7 @@ The primitive message digest algorithm shall be SHA512 as defined in [ISO/IEC 10
 
 Run-in, as defined in [ST 377-1](https://doi.org/10.5594/SMPTE.ST377-1.2011), Sec. 6.5, "Run-In Sequence", shall not be contributed to the digest. If present, run-in bytes shall be skipped before digest calculation begins.
 
-Note to IMF implementors: <b>There is no run-in in IMF.</b> MXF run-in is disallowed for use by the [IMF Essence Component](https://doi.org/10.5594/SMPTE.ST2067-5.2013). This provision of the MXF-DIGEST process exists for maximum compatibility with other MXF applications.
+Note to IMF implementors: <b>There is no run-in in IMF.</b> Use of MXF run-in is disallowed by the [IMF Essence Component](https://doi.org/10.5594/SMPTE.ST2067-5.2013). This provision of the MXF-DIGEST process exists for maximum compatibility with other MXF applications.
 
 
 ### KLV Packet Digests
